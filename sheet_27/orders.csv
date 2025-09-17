@@ -1,6 +1,0 @@
-order_id,customer_name,product,quantity,price,order_date
-1,John Doe,Laptop,1,750,2025-09-01
-2,Jane Smith,Phone,2,500,2025-09-02
-3,Robert Brown,Tablet,1,300,2025-09-03
-4,Linda Johnson,Headphones,3,150,2025-09-04
-5,Michael White,Monitor,2,400,2025-09-05
