@@ -6,6 +6,8 @@ class HospitalAppointment(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Hospital Appointment"
     _rec_name="patient_id"
+    _order = "appointment_time desc"
+
 
     state = fields.Selection(
         [('draft', 'Draft'),

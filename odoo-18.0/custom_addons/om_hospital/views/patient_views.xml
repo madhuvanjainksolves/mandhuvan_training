@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <!-- List View -->
     <record id="view_hospital_patient_list" model="ir.ui.view">
         <field name="name">hospital_patient_list</field>
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <list>
                 <field name="name" string="Patient Name"/>
-                <field name="age"/>
-                <field name="gender"/>
-                <field name="phone"/>
-                <field name="blood_group"/>
+                <field name="age" string="Age"/>
+                <field name="gender" string="Gender"/>
+                <field name="phone" string="Phone"/>
+                <field name="blood_group" string="Blood Group"/>
             </list>
         </field>
     </record>
@@ -26,14 +27,15 @@
                 <field name="age"/>
                 <field name="gender"/>
                 <field name="blood_group"/>
+
                 <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"/>
                 <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"/>
-<!--                <separator/>-->
-<!--                <filter name="filter_kids" string="Kids" domain="[('age', '&lt;=', 5)]"/>-->
                 <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+
                 <group expand="0" string="Group By">
                     <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>
                 </group>
+
                 <searchpanel>
                     <field name="gender" icon="fa-users" select="multi" enable_counters="1"/>
                 </searchpanel>
@@ -47,6 +49,15 @@
         <field name="model">hospital.patient</field>
         <field name="arch" type="xml">
             <form>
+                <!-- Header: Stat Button -->
+                <header>
+                    <button name="action_view_appointments" type="object"
+                            icon="fa-calendar" string="Appointments" class="oe_stat_button">
+                        <field name="appointment_count" widget="statinfo"/>
+                    </button>
+                </header>
+
+                <!-- Main Form Sheet -->
                 <sheet>
                     <group>
                         <group>
@@ -55,22 +66,23 @@
                             <field name="gender"/>
                             <field name="date_of_birth"/>
                             <field name="blood_group"/>
-
                         </group>
                         <group>
                             <field name="ref"/>
                             <field name="phone"/>
                             <field name="email"/>
-                            <field name="address"/>
+                            <field name="address" string="Address"/>
                             <field name="active" invisible="1"/>
                         </group>
                     </group>
+
                     <notebook>
                         <page string="Appointments">
                             <field name="appointment_ids"/>
                         </page>
                     </notebook>
                 </sheet>
+
                 <chatter/>
             </form>
         </field>

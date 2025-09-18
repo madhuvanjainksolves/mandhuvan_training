@@ -7,6 +7,7 @@ class HospitalPatient(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _name = "hospital.patient"
     _description = "Hospital Patient"
+    _order = "name"
 
     name = fields.Char(string="Name", tracking=True, required=True)
     age = fields.Integer(string="Age", compute="_compute_age", inverse= "_inverse_age" ,store = True, tracking=True)
@@ -54,4 +55,21 @@ class HospitalPatient(models.Model):
 
     # One2many
     appointment_ids = fields.One2many("hospital.appointment", "patient_id", string="Appointments")
+    appointment_count = fields.Integer(string="Appointments", compute="_compute_appointment_count")
+
+    @api.depends('appointment_ids')
+    def _compute_appointment_count(self):
+        for patient in self:
+            patient.appointment_count = len(patient.appointment_ids)
+
+    def action_view_appointments(self):
+        self.ensure_one()
+        return {
+            'name': 'Appointments',
+            'type': 'ir.actions.act_window',
+            'res_model': 'hospital.appointment',
+            'view_mode': 'tree,form',
+            'domain': [('patient_id', '=', self.id)],
+        }
+
 

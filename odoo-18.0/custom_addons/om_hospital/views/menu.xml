@@ -6,7 +6,7 @@
               sequence="0"/>
 
     <menuitem id="menu_patient_master"
-              name="patient_details"
+              name="Patient Details"
               parent="menu_hospital_root"
               sequence="0"/>
 
