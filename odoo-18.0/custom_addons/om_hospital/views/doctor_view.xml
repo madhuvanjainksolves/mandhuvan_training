@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree/List View -->
+    <record id="view_hospital_doctor_list" model="ir.ui.view">
+        <field name="name">hospital_doctor_list</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" string="Doctor Name"/>
+                <field name="speciality"/>
+                <field name="phone"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_hospital_doctor_search" model="ir.ui.view">
+        <field name="name">hospital_doctor_search</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Doctor Name"/>
+                <field name="speciality"/>
+                <field name="phone"/>
+                <filter name="filter_speciality" string="Has Speciality" domain="[('speciality', '!=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Speciality" name="group_by_speciality" context="{'group_by': 'speciality'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_hospital_doctor_form" model="ir.ui.view">
+        <field name="name">hospital_doctor_form</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="speciality"/>
+                        </group>
+                        <group>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="available_days"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Appointments">
+                            <field name="appointment_ids" widget="many2many_tags"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hospital_doctor" model="ir.actions.act_window">
+        <field name="name">Doctors</field>
+        <field name="res_model">hospital.doctor</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first doctor
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_doctor"
+              name="Doctors"
+              action="action_hospital_doctor"
+              parent="menu_patient_master"
+              sequence="1"/>
+</odoo>

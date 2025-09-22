@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hospital_patient_form_guardian" model="ir.ui.view">
+        <field name="name">hospital_patient_form_guardian</field>
+        <field name="model">hospital.patient</field>
+        <field name="inherit_id" ref="view_hospital_patient_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='address']" position="after">
+                <field name="guardian_name"/>
+                <field name="guardian_relation"/>
+                <field name="guardian_contact"/>
+                <field name="guardian_address"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
