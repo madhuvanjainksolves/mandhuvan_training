@@ -39,10 +39,23 @@
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancel" class="btn-secondary"
+                            invisible="state in ['cancelled','done']"/>
+                    <button name="action_create_patient" type="object" string="Create Patient" class="btn-success"
+                            invisible="state != 'draft'"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done,cancelled"/>
+                </header>
                 <sheet>
                     <group>
                         <group>
-                            <field name="patient_id"/>
+                            <!-- Editable patient name -->
+                            <field name="patient_name"/>
+                            <!-- Hidden patient_id, filled after creation -->
+                            <field name="patient_id" invisible="1"/>
                             <field name="gender"/>
                             <field name="booking_date"/>
                             <field name="state"/>
@@ -51,13 +64,13 @@
                             <field name="appointment_time"/>
                             <field name="doctor_ids" widget="many2many_tags"/>
                             <field name="ref"/>
-                            <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done,cancelled"/>
                         </group>
                     </group>
                     <group>
                         <field name="description"/>
                     </group>
                 </sheet>
+
                 <chatter/>
             </form>
         </field>
