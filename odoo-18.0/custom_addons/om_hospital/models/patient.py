@@ -12,7 +12,7 @@ class HospitalPatient(models.Model):
     name = fields.Char(string="Name", tracking=True, required=True)
     age = fields.Integer(string="Age", compute="_compute_age", inverse= "_inverse_age" ,store = True, tracking=True)
     ref = fields.Char(string="Reference", default="madhuvan jain")
-    gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender", tracking=True, required=True)
+    gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender", tracking=True)
     active = fields.Boolean(string="Active", default=True)
     date_of_birth = fields.Date(string="Date of Birth")
 
@@ -24,6 +24,7 @@ class HospitalPatient(models.Model):
     phone = fields.Char(string="Phone Number")
     email = fields.Char()
     address = fields.Text(string="Address")
+    name_seq = fields.Char( string="Patient ID", required=True, copy=False, readonly=True, default=lambda self: self.env["ir.sequence"].next_by_code("hospital.patient"),)
 
     # compute method for age
     @api.depends('date_of_birth')
@@ -46,8 +47,9 @@ class HospitalPatient(models.Model):
     @api.constrains('age')
     def _check_age(self):
         for rec in self:
-            if rec.age <= 0 :
-                raise ValidationError("age is incorrect ")
+            # Only check if age is set
+            if rec.age and rec.age <= 0:
+                raise ValidationError("Age is incorrect")
 
     _sql_constraints = [
         ('unique_phone', 'UNIQUE(phone)', 'The phone number must be unique for each patient!')
@@ -71,5 +73,22 @@ class HospitalPatient(models.Model):
             'view_mode': 'tree,form',
             'domain': [('patient_id', '=', self.id)],
         }
+
+
+#     name get function and @api.model
+    @api.model
+    def create(self, vals):
+        if vals.get('name_seq', 'New') == 'New':
+            vals['name_seq'] = self.env['ir.sequence'].next_by_code('hospital.patient') or 'New'
+        return super(HospitalPatient, self).create(vals)
+
+    def name_get(self):
+        result = []
+        for record in self:
+            display_name = '%s - %s' % (record.name, record.name_seq)
+            result.append((record.id, display_name))
+        return result
+
+
 
 
