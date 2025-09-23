@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="email_template_appointment_notify" model="mail.template">
+        <field name="name">Appointment Notification</field>
+        <field name="model_id" ref="model_hospital_appointment"/>
+        <field name="subject">Appointment Reminder for ${object.patient_id.name or 'Patient'}</field>
+        <field name="email_from">${(object.company_id.email or 'hospital@example.com')}</field>
+        <field name="email_to">${object.patient_id.email}</field>
+        <field name="body_html"><![CDATA[
+<p>Dear ${object.patient_id.name or 'Patient'},</p>
+
+<p>This is a reminder for your upcoming appointment:</p>
+
+<p>
+<strong>Date:</strong> <t t-esc="object.appointment_time and object.appointment_time.strftime('%d-%m-%Y') or 'Not Scheduled'"/><br/>
+<strong>Time:</strong> <t t-esc="object.appointment_time and object.appointment_time.strftime('%H:%M %p') or 'Not Scheduled'"/><br/>
+<strong>Doctor(s):</strong> <t t-esc="', '.join(object.doctor_ids.mapped('name')) or 'Not Assigned'"/>
+</p>
+
+<p>Thank you,<br/>Hospital Management</p>
+        ]]></field>
+    </record>
+</odoo>

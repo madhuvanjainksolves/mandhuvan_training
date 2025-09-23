@@ -1,0 +1,17 @@
+<odoo>
+    <record id="action_hospital_dashboard" model="ir.actions.client">
+        <field name="name">Hospital Dashboard</field>
+        <field name="tag">graph.action_graph</field>
+        <field name="params">{
+            'model': 'hospital.appointment',
+            'view_type': 'graph'
+        }</field>
+    </record>
+
+    <menuitem id="menu_hospital_dashboard"
+              name="Appointments Dashboard"
+              parent="menu_patient_master"
+              action="action_hospital_dashboard"
+              sequence="1"/>
+
+</odoo>

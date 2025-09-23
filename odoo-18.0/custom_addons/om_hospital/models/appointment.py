@@ -1,5 +1,6 @@
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from datetime import datetime
 
 
 class HospitalAppointment(models.Model):
@@ -125,3 +126,29 @@ class HospitalAppointment(models.Model):
             # Assign the created patient to appointment
             appointment.patient_id = new_patient.id
         return True
+
+    # defining button for performing notification of appointment to patient
+    def action_notify_patient(self):
+        template = self.env.ref('om_hospital.email_template_appointment_notify')
+        template.send_mail(self.id, force_send=True)
+        self.message_post(body="Appointment notification sent to patient.")
+
+
+    # Report Actions - print appointment report
+    def print_appointment_report(self):
+        return self.env.ref('om_hospital.report_hospital_appointment').report_action(self)
+
+    # scheduled action (ir.cron) - updating appointment status if that time is passed away
+
+    @api.model
+    def update_appointment_statuses(self):
+            # Example: automatically set past appointments to 'done'
+        today = fields.Datetime.now()
+        appointments = self.search([('state', '=', 'draft'), ('appointment_time', '<', today)])
+        appointments.write({'state': 'done'})
+
+    def print_appointment_report(self):
+        # This triggers your QWeb report
+        return self.env.ref('hospital.report_appointment_template').report_action(self)
+
+
