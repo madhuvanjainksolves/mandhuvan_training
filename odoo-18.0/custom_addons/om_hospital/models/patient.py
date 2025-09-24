@@ -15,6 +15,16 @@ class HospitalPatient(models.Model):
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender", tracking=True)
     active = fields.Boolean(string="Active", default=True)
     date_of_birth = fields.Date(string="Date of Birth")
+    state = fields.Selection(
+        [
+            ('draft', 'Draft'),
+            ('admitted', 'Admitted'),
+            ('discharged', 'Discharged'),
+        ],
+        string="Status",
+        default="draft",
+        tracking=True
+    )
 
     blood_group = fields.Selection(
         [('a+', 'A+'), ('a-', 'A-'), ('b+', 'B+'), ('b-', 'B-'),

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View -->
+    <record id="view_hospital_appointment_form" model="ir.ui.view">
+        <field name="name">hospital_appointment_form</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_confirm" type="object" string="Confirm" class="btn-primary"
+                            invisible="state != 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancel" class="btn-secondary"
+                            invisible="state in ['cancelled','done']"/>
+                    <button name="action_create_patient" type="object" string="Create Patient" class="btn-success"
+                            invisible="state != 'draft'"/>
+                    <button name="action_notify_patient" type="object" string="Notify Patient" class="btn-primary"/>
+                    <!-- Print button -->
+                    <button name="print_appointment_report" type="object" string="Print Report" class="btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done,cancelled"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="gender"/>
+                            <field name="booking_date"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="appointment_time"/>
+                            <field name="doctor_ids" widget="many2many_tags"/>
+                            <field name="ref"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Report Action -->
+    <record id="report_hospital_appointment" model="ir.actions.report">
+        <field name="name">Appointment Report</field>
+        <field name="model">hospital.appointment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">om_hospital.report_appointment_template</field>
+        <field name="print_report_name">'Appointment - %s' % (object.patient_id.name)</field>
+    </record>
+
+    <!-- QWeb Report Template -->
+    <template id="report_appointment_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style>
+                            .page { font-size: 13px; }
+                            h2 { color: #2C3E50; border-bottom: 2px solid #000; padding-bottom: 5px; text-align:center;
+                            }
+                            .badge { padding: 5px 10px; border-radius: 4px; color: #fff; }
+                            .bg-success { background-color: #28a745; }
+                            .bg-warning { background-color: #ffc107; }
+                            table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+                            th, td { border: 1px solid #000; padding: 5px; text-align: left; }
+                        </style>
+
+                        <h2>Appointment Details</h2>
+
+                        <p>
+                            <strong>Printed by:</strong>
+                            <t t-esc="user.name"/>
+                            on
+                            <t t-esc="time.strftime('%d-%m-%Y %H:%M')"/>
+                        </p>
+                        <p>
+                            <strong>Company:</strong>
+                            <t t-esc="res_company.name"/>
+                        </p>
+
+                        <table class="table table-sm table-bordered">
+                            <tr>
+                                <th>Patient</th>
+                                <td>
+                                    <t t-esc="o.patient_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Gender</th>
+                                <td>
+                                    <t t-esc="o.gender"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Booking Date</th>
+                                <td>
+                                    <t t-esc="o.booking_date"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Appointment Time</th>
+                                <td>
+                                    <t t-esc="o.appointment_time"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <td>
+                                    <span t-attf-class="badge #{'bg-success' if o.state == 'done' else 'bg-warning'}">
+                                        <t t-esc="o.state"/>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h4>Assigned Doctors</h4>
+                        <ul>
+                            <t t-foreach="o.doctor_ids" t-as="doc">
+                                <li>
+                                    <t t-esc="doc.name"/>
+                                </li>
+                            </t>
+                        </ul>
+
+                        <h4>Appointment Reference QR</h4>
+                        <img t-att-src="'/report/barcode/QR/%s' % (o.id)" width="120" height="120"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <!-- Server Action: Print Appointment Report -->
+    <record id="action_print_appointments" model="ir.actions.server">
+        <field name="name">Print Appointment</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="om_hospital.model_hospital_appointment"/>
+        <field name="binding_model_id" ref="om_hospital.model_hospital_appointment"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = records.env.ref('om_hospital.report_hospital_appointment').report_action(records)
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- URL Action to about hospital -->
+    <record id="action_about_hospital" model="ir.actions.act_url">
+        <field name="name">About Hospital</field>
+        <field name="type">ir.actions.act_url</field>
+        <field name="url">https://www.apollo.com/aboutus</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_about_hospital"
+              name="About Hospital"
+              parent="menu_hospital_root"
+              action="action_about_hospital"
+              sequence="10"/>
+    <!-- Server Action to Notify Patient -->
+    <record id="server_action_notify_appointment" model="ir.actions.server">
+        <field name="name">Notify Patient About Appointment</field>
+        <field name="model_id" ref="model_hospital_appointment"/>
+        <field name="state">code</field>
+        <field name="code"><![CDATA[
+patient = record.patient_id
+if patient and patient.email:
+    template = env.ref('hospital.email_template_appointment_notify')
+    if template:
+        template.send_mail(record.id, force_send=True)
+        record.message_post(body="Appointment notification sent to patient: %s" % patient.email)
+    else:
+        record.message_post(body="Email template not found!")
+else:
+    record.message_post(body="No email address found for this patient.")
+    ]]></field>
+    </record>
+
+</odoo>

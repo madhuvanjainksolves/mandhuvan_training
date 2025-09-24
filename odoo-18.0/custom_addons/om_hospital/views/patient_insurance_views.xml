@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- List / Tree View -->
+    <!-- List View -->
     <record id="view_hospital_patient_insurance_list" model="ir.ui.view">
         <field name="name">hospital.patient.insurance.list</field>
         <field name="model">hospital.patient.insurance</field>

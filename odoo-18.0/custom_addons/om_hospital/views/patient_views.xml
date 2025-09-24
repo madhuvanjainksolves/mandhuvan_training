@@ -12,6 +12,7 @@
                 <field name="gender" string="Gender"/>
                 <field name="phone" string="Phone"/>
                 <field name="blood_group" string="Blood Group"/>
+                <field name="state" string="Status"/>
             </list>
         </field>
     </record>
@@ -27,6 +28,7 @@
                 <field name="age"/>
                 <field name="gender"/>
                 <field name="blood_group"/>
+                <field name="state"/>
 
                 <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"/>
                 <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"/>
@@ -34,10 +36,12 @@
 
                 <group expand="0" string="Group By">
                     <filter string="Gender" name="group_by_gender" context="{'group_by': 'gender'}"/>
+                    <filter string="Status" name="group_by_state" context="{'group_by': 'state'}"/>
                 </group>
 
                 <searchpanel>
                     <field name="gender" icon="fa-users" select="multi" enable_counters="1"/>
+                    <field name="state" icon="fa-flag" select="multi" enable_counters="1"/>
                 </searchpanel>
             </search>
         </field>
@@ -55,6 +59,7 @@
                             icon="fa-calendar" string="Appointments" class="oe_stat_button">
                         <field name="appointment_count" widget="statinfo"/>
                     </button>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,admitted,discharged"/>
                 </header>
 
                 <!-- Main Form Sheet -->
@@ -66,6 +71,7 @@
                             <field name="gender"/>
                             <field name="date_of_birth"/>
                             <field name="blood_group"/>
+                            <field name="state"/>
                         </group>
                         <group>
                             <field name="ref"/>
@@ -88,7 +94,7 @@
         </field>
     </record>
 
-    <!-- Action -->
+    <!-- Window Action -->
     <record id="action_hospital_patient" model="ir.actions.act_window">
         <field name="name">Patients</field>
         <field name="res_model">hospital.patient</field>

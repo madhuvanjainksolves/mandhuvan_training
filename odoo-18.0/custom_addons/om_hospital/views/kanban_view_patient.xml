@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Kanban View for Hospital Patient -->
+    <record id="view_hospital_patient_kanban" model="ir.ui.view">
+        <field name="name">hospital.patient.kanban</field>
+        <field name="model">hospital.patient</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <!-- Preload fields -->
+                <field name="state"/>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="gender"/>
+
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click o_kanban_card">
+                            <!-- Patient Name -->
+                            <div class="o_kanban_record_top">
+                                <strong><field name="name"/></strong>
+                            </div>
+
+                            <!-- Patient Info -->
+                            <div class="o_kanban_details">
+                                <p><b>Age:</b> <field name="age"/></p>
+                                <p><b>Gender:</b> <field name="gender"/></p>
+                            </div>
+
+                            <!-- Patient State -->
+                            <div class="o_kanban_status">
+                                <t t-if="record.state.raw_value == 'new'">
+                                    <span class="badge badge-primary">This is new!</span>
+                                </t>
+                                <t t-else="">
+                                    <span class="badge badge-secondary">
+                                        <field name="state"/>
+                                    </span>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action to open Patients with Kanban -->
+    <record id="action_hospital_patient_kanban" model="ir.actions.act_window">
+        <field name="name">Patients Kanban View</field>
+        <field name="res_model">hospital.patient</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_hospital_patient"
+              name="Patients Kanban View"
+              parent="menu_patient_master"
+              action="action_hospital_patient_kanban"
+              sequence="7"/>
+</odoo>
