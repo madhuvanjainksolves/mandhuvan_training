@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student,access_student,model_school_student,base.group_user,1,1,1,1
+access_class,access_class,model_school_class,base.group_user,1,1,1,1
+access_subject,access_subject,model_school_subject,base.group_user,1,1,1,1
+access_fee,access_fee,model_school_fee,base.group_user,1,1,1,1
+access_student_admission,access_student_admission,model_school_student,odoo_school.group_school_admission_shell,1,0,1,0
+access_fee_manager,access_fee_manager,model_school_fee,odoo_school.group_school_fee_manager,1,1,0,0

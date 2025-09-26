@@ -35,6 +35,7 @@ class HospitalPatient(models.Model):
     email = fields.Char()
     address = fields.Text(string="Address")
     name_seq = fields.Char( string="Patient ID", required=True, copy=False, readonly=True, default=lambda self: self.env["ir.sequence"].next_by_code("hospital.patient"),)
+    user_id = fields.Many2one('res.users', string="User", default=lambda self: self.env.user)
 
     # compute method for age
     @api.depends('date_of_birth')
@@ -69,6 +70,15 @@ class HospitalPatient(models.Model):
     appointment_ids = fields.One2many("hospital.appointment", "patient_id", string="Appointments")
     appointment_count = fields.Integer(string="Appointments", compute="_compute_appointment_count")
 
+    # Many2many
+    doctor_ids = fields.Many2many(
+        "hospital.doctor",
+        "hospital_doctor_patient_rel",
+        "patient_id",
+        "doctor_id",
+        string="Doctors"
+    )
+
     @api.depends('appointment_ids')
     def _compute_appointment_count(self):
         for patient in self:
@@ -91,6 +101,28 @@ class HospitalPatient(models.Model):
         if vals.get('name_seq', 'New') == 'New':
             vals['name_seq'] = self.env['ir.sequence'].next_by_code('hospital.patient') or 'New'
         return super(HospitalPatient, self).create(vals)
+
+    @api.model
+    def create(self, vals):
+        # Create the patient record first
+        patient = super(HospitalPatient, self).create(vals)
+
+        # If no user is linked, create one automatically
+        if not patient.user_id:
+            group_patient = self.env.ref('om_hospital.group_hospital_patient')  # your patient group
+            user_vals = {
+                'name': patient.name,
+                'login': patient.email or patient.name.replace(" ", "").lower(),
+                'email': patient.email or "",
+                # 'groups_id': [(4, group_patient.id)],
+                'password': "patient123",  # default password (should be changed later)
+            }
+            user = self.env['res.users'].create(user_vals)
+
+            # Link user to patient
+            patient.user_id = user.id
+
+        return patient
 
     def name_get(self):
         result = []

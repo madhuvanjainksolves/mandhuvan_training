@@ -1,0 +1,12 @@
+<odoo>
+    <record id="group_school_admission_shell" model="res.groups">
+        <field name="name">Admission shell</field>
+        <field name="category_id" ref="base.module_category_human_resources"/>
+    </record>
+
+    <record id="group_school_fee_manager" model="res.groups">
+        <field name="name">Fee Manager</field>
+        <field name="category_id" ref="base.module_category_human_resources"/>
+    </record>
+
+</odoo>

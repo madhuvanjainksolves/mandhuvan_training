@@ -1,0 +1,25 @@
+<odoo>
+    <record id="rule_admission_shell_see_and_create_student_only" model="ir.rule">
+        <field name="name">Admission_shell_see_and_create_student_only</field>
+        <field name="model_id" ref="model_school_student"/>
+        <field name="groups" eval="[(4, ref('odoo_school.group_school_admission_shell'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+
+    <record id="rule_fee_manager_manage_fee" model="ir.rule">
+        <field name="name">Fee Manager can see all appointments</field>
+        <field name="model_id" ref="model_school_fee"/>
+        <field name="groups" eval="[(4, ref('odoo_school.group_school_fee_manager'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+</odoo>

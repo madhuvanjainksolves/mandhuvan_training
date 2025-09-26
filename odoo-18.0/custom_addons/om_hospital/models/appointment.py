@@ -24,8 +24,7 @@ class HospitalAppointment(models.Model):
 
     @api.onchange('patient_id')
     def onchange_patient_id(self):
-        self.ref = self.patient_id.ref
-
+        self.ref = self.patient_id.ref if self.patient_id else False
 
     # Many2one
     patient_id = fields.Many2one("hospital.patient", string="Patient")
@@ -147,8 +146,7 @@ class HospitalAppointment(models.Model):
         appointments = self.search([('state', '=', 'draft'), ('appointment_time', '<', today)])
         appointments.write({'state': 'done'})
 
-    def print_appointment_report(self):
-        # This triggers your QWeb report
-        return self.env.ref('hospital.report_appointment_template').report_action(self)
+
+
 
 

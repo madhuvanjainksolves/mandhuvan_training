@@ -4,3 +4,11 @@ om_hospital.access_hospital_appointment,access_hospital_appointment,model_hospit
 om_hospital.access_hospital_doctor,access_hospital_doctor,model_hospital_doctor,base.group_user,1,1,1,1
 om_hospital.access_hospital_guardian,access_hospital_guardian,model_hospital_patient,base.group_user,1,1,1,1
 om_hospital.access_hospital_insurance,access_hospital_insurance,model_hospital_patient_insurance,base.group_user,1,1,1,1
+access_patient_patient,hospital.patient.patient,model_hospital_patient,om_hospital.group_hospital_patient,1,0,0,0
+access_patient_appointment,hospital.patient.appointment,model_hospital_appointment,om_hospital.group_hospital_patient,1,0,0,0
+access_patient_doctor,hospital.patient.doctor,model_hospital_patient,om_hospital.group_hospital_doctor,1,1,0,0
+access_appointment_doctor,hospital.appointment.doctor,model_hospital_appointment,om_hospital.group_hospital_doctor,1,1,0,0
+access_doctor_model,hospital.doctor.doctor,model_hospital_doctor,om_hospital.group_hospital_doctor,1,1,0,0
+access_patient_receptionist,hospital.patient.receptionist,model_hospital_patient,om_hospital.group_hospital_receptionist,1,1,1,0
+access_appointment_receptionist,hospital.appointment.receptionist,model_hospital_appointment,om_hospital.group_hospital_receptionist,1,1,1,0
+access_doctor_receptionist,hospital.doctor.receptionist,model_hospital_doctor,om_hospital.group_hospital_receptionist,1,1,1,0

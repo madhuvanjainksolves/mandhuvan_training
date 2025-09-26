@@ -11,4 +11,6 @@
         <field name="margin_left">10</field>
         <field name="margin_right">10</field>
     </record>
+
+
 </odoo>

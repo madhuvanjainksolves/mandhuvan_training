@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_school_root"
+              name="School"
+              sequence="0"/>
+
+    <!-- Student Details menu-->
+    <menuitem id="menu_student_master"
+              name="Student Details"
+              parent="menu_school_root"
+              sequence="0"/>
+
+    <!-- Student Menu -->
+    <menuitem id="menu_student"
+              name="Student"
+              action="action_school_student"
+              parent="menu_student_master"
+              sequence="0"/>
+
+    <!--School Class Menu-->
+    <menuitem id="menu_school_class"
+              name="School Class"
+              action="action_school_class"
+              parent="menu_student_master"
+              sequence="1"/>
+
+    <!--Subject Menu-->
+    <menuitem id="menu_school_subject"
+              name="Subject"
+              action="action_school_subject"
+              parent="menu_student_master"
+              sequence="2"/>
+
+    <!-- Menu-->
+    <menuitem id="menu_school_fee"
+              name="Fee"
+              action="action_school_fee"
+              parent="menu_student_master"
+              sequence="3"/>
+
+
+</odoo>
