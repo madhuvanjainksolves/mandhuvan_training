@@ -15,7 +15,6 @@
                     <button name="action_create_patient" type="object" string="Create Patient" class="btn-success"
                             invisible="state != 'draft'"/>
                     <button name="action_notify_patient" type="object" string="Notify Patient" class="btn-primary"/>
-                    <!-- Print button -->
                     <button name="print_appointment_report" type="object" string="Print Report" class="btn-primary"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done,cancelled"/>
                 </header>
@@ -44,11 +43,13 @@
 
     <!-- Report Action -->
     <record id="report_hospital_appointment" model="ir.actions.report">
-        <field name="name">Appointment Report</field>
+        <field name="name">Print Report</field>
         <field name="model">hospital.appointment</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">om_hospital.report_appointment_template</field>
         <field name="print_report_name">'Appointment - %s' % (object.patient_id.name)</field>
+        <field name="binding_model_id" ref="om_hospital.model_hospital_appointment"/>
+        <field name="binding_view_types">form,list</field>
     </record>
 
     <!-- QWeb Report Template -->
@@ -59,14 +60,27 @@
                     <div class="page">
                         <style>
                             .page { font-size: 13px; }
-                            h2 { color: #2C3E50; border-bottom: 2px solid #000; padding-bottom: 5px; text-align:center;
-                            }
+                            h2 { color: #2C3E50; border-bottom: 2px solid #000; padding-bottom: 5px; text-align:center; }
                             .badge { padding: 5px 10px; border-radius: 4px; color: #fff; }
                             .bg-success { background-color: #28a745; }
                             .bg-warning { background-color: #ffc107; }
                             table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
                             th, td { border: 1px solid #000; padding: 5px; text-align: left; }
+                            .header-flex { display: flex; justify-content: space-between; align-items: center; }
+                            .qr-code { text-align: right; }
                         </style>
+
+                        <!-- Custom header row with company info + QR -->
+                        <div class="header-flex">
+                            <div>
+                                <!-- This block already comes from external_layout (company logo + details) -->
+                                <t t-call="web.external_layout"/>
+                            </div>
+                            <div class="qr-code">
+                                <img t-att-src="'/report/barcode/QR/%s' % (o.ref or o.id)" width="120" height="120"/>
+                                <p><strong>Ref:</strong> <t t-esc="o.ref or o.id"/></p>
+                            </div>
+                        </div>
 
                         <h2>Appointment Details</h2>
 
@@ -84,27 +98,19 @@
                         <table class="table table-sm table-bordered">
                             <tr>
                                 <th>Patient</th>
-                                <td>
-                                    <t t-esc="o.patient_id.name"/>
-                                </td>
+                                <td><t t-esc="o.patient_id.name"/></td>
                             </tr>
                             <tr>
                                 <th>Gender</th>
-                                <td>
-                                    <t t-esc="o.gender"/>
-                                </td>
+                                <td><t t-esc="o.gender"/></td>
                             </tr>
                             <tr>
                                 <th>Booking Date</th>
-                                <td>
-                                    <t t-esc="o.booking_date"/>
-                                </td>
+                                <td><t t-esc="o.booking_date"/></td>
                             </tr>
                             <tr>
                                 <th>Appointment Time</th>
-                                <td>
-                                    <t t-esc="o.appointment_time"/>
-                                </td>
+                                <td><t t-esc="o.appointment_time"/></td>
                             </tr>
                             <tr>
                                 <th>Status</th>
@@ -119,14 +125,9 @@
                         <h4>Assigned Doctors</h4>
                         <ul>
                             <t t-foreach="o.doctor_ids" t-as="doc">
-                                <li>
-                                    <t t-esc="doc.name"/>
-                                </li>
+                                <li><t t-esc="doc.name"/></li>
                             </t>
                         </ul>
-
-                        <h4>Appointment Reference QR</h4>
-                        <img t-att-src="'/report/barcode/QR/%s' % (o.id)" width="120" height="120"/>
                     </div>
                 </t>
             </t>

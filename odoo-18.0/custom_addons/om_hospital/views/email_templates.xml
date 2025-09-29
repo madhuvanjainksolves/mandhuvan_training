@@ -3,11 +3,11 @@
     <record id="email_template_appointment_notify" model="mail.template">
         <field name="name">Appointment Notification</field>
         <field name="model_id" ref="model_hospital_appointment"/>
-        <field name="subject">Appointment Reminder for ${object.patient_id.name or 'Patient'}</field>
+        <field name="subject">Appointment Reminder for {{ object.patient_id.name if object.patient_id else 'Patient' }}</field>
         <field name="email_from">${(object.company_id.email or 'hospital@example.com')}</field>
         <field name="email_to">${object.patient_id.email}</field>
         <field name="body_html"><![CDATA[
-<p>Dear ${object.patient_id.name or 'Patient'},</p>
+<p>Dear <t t-esc="object.patient_id and object.patient_id.name or 'Patient'"/> ,</p>
 
 <p>This is a reminder for your upcoming appointment:</p>
 

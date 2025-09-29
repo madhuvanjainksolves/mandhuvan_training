@@ -1,0 +1,50 @@
+<odoo>
+    <record id="view_exams_student_list" model="ir.ui.view">
+        <field name="name">exams.students.list</field>
+        <field name="model">exams.students</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="class_id"/>
+                <field name="roll_number"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_exams_student_form" model="ir.ui.view">
+        <field name="name">exams.students.form</field>
+        <field name="model">exams.students</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="class_id"/>
+                        <field name="roll_number"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Exams">
+                            <field name="exam_ids">
+                                <list editable="bottom">
+                                    <field name="subject_id"/>
+                                    <field name="marks"/>
+                                    <field name="exam_date"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_exams_student" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">exams.students</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+</odoo>

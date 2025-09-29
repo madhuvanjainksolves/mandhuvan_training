@@ -1,0 +1,23 @@
+{
+    "name": "Exams",
+    "version": "1.0.0",
+    "Sequence": "-101",
+    "summary": "Exam Module that is associated with students and subject",
+    "description": "This module info about marks of a student for that subject.",
+    "category": "Education",
+    "author": "Madhuvan Jain",
+    "description": """It is a Exams module""",
+    "depends": ["base"],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/exams_students_views.xml',
+        'views/exams_subjects_views.xml',
+        'views/exam_views.xml',
+        'views/exams_wizard_views.xml',
+        'views/exams_charts_views.xml',
+        'views/exams_menus.xml',
+    ],
+    "installable": True,
+    "application": True,
+    'license': 'LGPL-3',
+}

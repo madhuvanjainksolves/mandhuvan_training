@@ -1,6 +1,3 @@
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-
 {
     'name': 'hospital management',
     'version': '1.0.0',
@@ -11,6 +8,8 @@
     'description': """It is a module that is use for hospital management/n""",
     'depends': ['mail'],
     'data': [
+        "security/hospital_groups.xml",
+        "security/hospital_record_rules.xml",
         "security/ir.model.access.csv",
         "views/patient_views.xml",
         "views/female_patient_views.xml",
