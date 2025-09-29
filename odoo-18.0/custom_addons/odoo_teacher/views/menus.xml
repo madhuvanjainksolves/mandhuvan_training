@@ -10,7 +10,15 @@
     <menuitem id="menu_teacher_master"
               name="Teacher Details"
               parent="menu_teacher_root"
+              action="action_teacher"
               sequence="2"/>
+
+
+    <menuitem id="menu_school_class"
+              name="Classes"
+              parent="menu_teacher_root"
+              action="action_school_class"
+              sequence="3"/>
 
 
 </odoo>

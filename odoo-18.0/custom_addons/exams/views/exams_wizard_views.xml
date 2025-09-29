@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_exam_wizard_form" model="ir.ui.view">
+        <field name="name">exams.creation.wizard.form</field>
+        <field name="model">exams.creation.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create Exams for All Students">
+                <sheet>
+                    <group>
+                        <field name="exam_date"/>
+                    </group>
+                    <footer>
+                        <button string="Create Exams" type="object" name="create_exams" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_exam_creation_wizard" model="ir.actions.act_window">
+        <field name="name">Create Exams</field>
+        <field name="res_model">exams.creation.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_exam_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

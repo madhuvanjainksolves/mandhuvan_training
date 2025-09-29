@@ -1,0 +1,42 @@
+<odoo>
+    <menuitem id="menu_exams_root"
+              name="Exams"/>
+
+    <menuitem id="menu_exams_exam"
+              name="Exam Marks"
+              parent="menu_exams_root"
+              action="action_exams_exam"/>
+
+    <menuitem id="menu_exams_students"
+              name="Students"
+              parent="menu_exams_root"
+              action="action_exams_student"/>
+
+    <menuitem id="menu_exams_subjects"
+              name="Subjects"
+              parent="menu_exams_root"
+              action="action_exams_subject"/>
+
+    <menuitem id="menu_exam_wizard"
+              name="Create Exams"
+              parent="menu_exams_root"
+              action="action_exam_creation_wizard"/>
+
+    <menuitem id="menu_exams_charts"
+              name="Exam Charts"
+              parent="menu_exams_root"/>
+
+    <menuitem id="menu_exams_exam_pivot"
+              name="Pivot Exams"
+              parent="menu_exams_charts"
+              action="action_exams_exam_pivot"/>
+
+    <menuitem id="menu_exams_exam_pie"
+              name="Pie Chart Exams"
+              parent="menu_exams_charts"
+              action="action_exams_exam_pie"/>
+
+    <menuitem id="menu_exams_exam_graph" name="Graph Exams"
+              parent="menu_exams_charts" action="action_exams_exam_graph"/>
+</odoo>
+

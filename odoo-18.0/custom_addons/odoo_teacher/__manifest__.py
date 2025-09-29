@@ -7,9 +7,10 @@
     "author": "Madhuvan Jain",
     "depends": ["hr"],
     "data": [
+        "security/ir.model.access.csv",
         "views/hr_employee_views.xml",
+        "views/school_class_views.xml",
         "views/menus.xml",
-        "school_class_views.xml",
     ],
     "installable": True,
     "application": True,
