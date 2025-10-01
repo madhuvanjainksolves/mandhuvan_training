@@ -1,0 +1,28 @@
+{
+    "name": "Device Management",
+    "version": "1.0.0",
+    "sequence": -80,
+    "summary": "Manage devices, brands, types, models, and attributes",
+    "description": """
+        This module manages device types, brands, models, attributes, attribute values,
+        and actual devices.
+    """,
+    "category": "Inventory",
+    "author": "Madhuvan Jain",
+    "depends": ["base", "hr"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/device_type_views.xml",
+        "views/device_brand_views.xml",
+        "views/device_attribute_views.xml",
+        "views/device_model_views.xml",
+        "views/device_attribute_value_views.xml",
+        "views/device_views.xml",
+        "views/device_attribute_assignment_views.xml",
+        "views/device_assignment_views.xml",
+        "views/device_menus.xml",
+    ],
+    "installable": True,
+    "application": True,
+    "license": "LGPL-3",
+}
