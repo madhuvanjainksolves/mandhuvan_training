@@ -1,0 +1,10 @@
+<odoo>
+    <record id="marks_report_pdf" model="ir.actions.report">
+        <field name="name">Marks Report</field>
+        <field name="model">marks.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">odoo_school.marks_report_template</field>
+        <field name="report_file">odoo_school.marks_report_template</field>
+    </record>
+
+</odoo>

@@ -6,9 +6,8 @@ class Student(models.Model):
 
     name = fields.Char(string="Name", required=True)
     age = fields.Integer(string="Age")
-    # Many2one
     class_id = fields.Many2one("school.class", string="Class")
-    # Many2many
     subject_ids = fields.Many2many("school.subject", string="Subjects")
-    # One2many
     fee_ids = fields.One2many("school.fee", "student_id", string="Fee")
+
+    marksentry_ids = fields.One2many("school.student.marks", "student_id", string="Marks Entries")

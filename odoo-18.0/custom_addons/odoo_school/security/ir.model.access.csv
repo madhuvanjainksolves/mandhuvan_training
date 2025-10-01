@@ -5,3 +5,6 @@ access_subject,access_subject,model_school_subject,base.group_user,1,1,1,1
 access_fee,access_fee,model_school_fee,base.group_user,1,1,1,1
 access_student_admission,access_student_admission,model_school_student,odoo_school.group_school_admission_shell,1,0,1,0
 access_fee_manager,access_fee_manager,model_school_fee,odoo_school.group_school_fee_manager,1,1,0,0
+access_student_marks,access_student_marks,model_school_student_marks,base.group_user,1,1,1,1
+access_student_marks_entry,access_student_marks_entry,model_school_marks_entry,base.group_user,1,1,1,1
+access_marks_report_wizard,access_marks_report_wizard,model_marks_report_wizard,base.group_user,1,0,1,0

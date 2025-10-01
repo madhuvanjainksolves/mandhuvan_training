@@ -7,3 +7,4 @@ class Subject(models.Model):
     name = fields.Char(string="Subject Name", required=True)
     # Many2many
     student_ids = fields.Many2many("school.student", string="Students")
+
