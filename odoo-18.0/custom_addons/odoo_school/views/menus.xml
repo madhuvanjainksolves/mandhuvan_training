@@ -40,5 +40,35 @@
               parent="menu_student_master"
               sequence="3"/>
 
+    <menuitem id="menu_marks_master"
+              name="Marks Details"
+              parent="menu_school_root"
+              sequence="0"/>
+
+    <!-- Marks Menu -->
+    <menuitem id="menu_student_marks"
+              name="Marks"
+              action="action_student_marks"
+              parent="menu_marks_master"
+              sequence="1"/>
+
+    <!-- Marks Entry Menu -->
+    <menuitem id="menu_student_marks_entry"
+              name="Marks Entry"
+              action="action_marks_entry"
+              parent="menu_marks_master"
+              sequence="2"/>
+
+    <!--wizard menu-->
+    <menuitem id="menu_marks_report_wizard"
+              name="Marks Report"
+              parent="menu_marks_master"
+              action="action_marks_report_wizard"
+              sequence="3"/>
+
+<!-- multiple views menu-->
+    <menuitem id="menu_marks_reports" name="Marks Reports" parent="menu_school_root"/>
+    <menuitem id="menu_marks_report_all" name="All Marks Reports" parent="menu_marks_reports" action="action_marks_report"/>
+
 
 </odoo>

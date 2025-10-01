@@ -1,0 +1,35 @@
+<odoo>
+ <template id="marks_report_template">
+        <t t-call="web.external_layout">
+            <main>
+                <div class="page">
+                    <h2 style="text-align:center;">Marks Report</h2>
+
+                    <t t-if="data">
+                        <p><strong>Class:</strong> <t t-esc="data.get('class_name','')"/></p>
+                        <p><strong>Subject:</strong> <t t-esc="data.get('subject_name','')"/></p>
+                    </t>
+
+                    <table class="table table-sm table-hover" style="width:100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background-color:#f2f2f2;">
+                                <th style="border: 1px solid black; padding:5px;">Student</th>
+                                <th style="border: 1px solid black; padding:5px;">Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="data">
+                                <t t-foreach="env['school.student.marks'].browse(data.get('marks_ids', []))" t-as="mark">
+                                    <tr>
+                                        <td style="border: 1px solid black; padding:5px;"><t t-esc="mark.student_id.name or 'N/A'"/></td>
+                                        <td style="border: 1px solid black; padding:5px;"><t t-esc="mark.marks or 'N/A'"/></td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </t>
+    </template>
+</odoo>
