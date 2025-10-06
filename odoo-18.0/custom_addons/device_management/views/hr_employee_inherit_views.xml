@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_employee_form_inherit_device" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit.device</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Assigned Devices">
+                    <field name="device_assignment_ids">
+                        <list string="Assigned Devices" editable="bottom">
+                            <field name="name"/>
+                            <field name="device_id"/>
+                            <field name="device_type_id" string="Device Type"/>
+                            <field name="device_brand_id" string="Brand"/>
+                            <field name="device_model_id" string="Model"/>
+                            <field name="date_start"/>
+                            <field name="date_expire"/>
+                            <field name="state"/>
+                        </list>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

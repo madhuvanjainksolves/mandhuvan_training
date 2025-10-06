@@ -21,6 +21,7 @@
         "views/device_attribute_assignment_views.xml",
         "views/device_assignment_views.xml",
         "views/device_menus.xml",
+        "views/hr_employee_inherit_views.xml",
     ],
     "installable": True,
     "application": True,
