@@ -7,7 +7,7 @@
                 <sheet>
                     <group>
                         <field name="class_id"/>
-                        <field name="subject_id"/>
+                        <field name="subject_id" domain="[('id', 'in', class_id.subject_ids)]"/>
                     </group>
                     <footer>
                         <button string="Generate Report" type="object" name="action_generate_report" class="btn-primary"/>

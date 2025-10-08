@@ -1,3 +1,6 @@
+from email.policy import default
+
+from docutils.nodes import reference
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -8,7 +11,13 @@ class DeviceType(models.Model):
 
     name = fields.Char(required=True)
     code = fields.Char(required=True)
-    sequence = fields.Integer(string="Sequence", copy=False)
+    sequence = fields.Char(
+        string="Sequence",
+        required=True,
+        copy=False,
+        readonly=True,
+        default=lambda self: ('New')
+    )
     device_attribute_ids = fields.One2many('device.attribute', 'device_type_id', string="Attributes")
     device_model_ids = fields.One2many('device.model', 'device_type_id', string="Device Models")
     device_ids = fields.One2many('device.device', 'device_type_id', string="Devices")
@@ -20,14 +29,22 @@ class DeviceType(models.Model):
     ]
 
     @api.model
-    def default_get(self, fields_list):
-        defaults = super(DeviceType, self).default_get(fields_list)
-        last_record = self.env['device.type'].search([], order='sequence desc', limit=1)
-        defaults['sequence'] = last_record.sequence + 1 if last_record else 1
-        return defaults
+    def create(self, vals):
+        if vals.get('sequence', ('New')) == ('New'):
+            vals['sequence'] = self.env['ir.sequence'].next_by_code('device.type') or _('New')
 
-    @api.constrains('sequence')
-    def _check_sequence_unique(self):
-        for record in self:
-            if self.search_count([('sequence', '=', record.sequence), ('id', '!=', record.id)]):
-                raise ValidationError("Sequence must be unique!")
+        res = super(DeviceType, self).create(vals)
+        return res
+
+    # @api.model
+    # def default_get(self, fields_list):
+    #     defaults = super(DeviceType, self).default_get(fields_list)
+    #     last_record = self.env['device.type'].search([], order='sequence desc', limit=1)
+    #     defaults['sequence'] = last_record.sequence + 1 if last_record else 1
+    #     return defaults
+    #
+    # @api.constrains('sequence')
+    # def _check_sequence_unique(self):
+    #     for record in self:
+    #         if self.search_count([('sequence', '=', record.sequence), ('id', '!=', record.id)]):
+    #             raise ValidationError("Sequence must be unique!")

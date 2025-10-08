@@ -12,6 +12,7 @@
     "depends": ["base", "hr"],
     "data": [
         "security/ir.model.access.csv",
+        "data/data.xml",
         "views/device_type_views.xml",
         "views/device_brand_views.xml",
         "views/device_attribute_views.xml",

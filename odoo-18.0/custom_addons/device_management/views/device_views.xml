@@ -27,7 +27,9 @@
                             <field name="device_type_id" string="Device Type"/>
                         </group>
                         <group>
-                            <field name="device_brand_id" string="Device Brand"/>
+                            <field name="device_brand_id" string="Device Brand"
+                                   attrs="{'invisible': [('device_type_id','=',False)]}"/>
+
                             <field name="device_model_id" string="Device Model"/>
                         </group>
                     </group>

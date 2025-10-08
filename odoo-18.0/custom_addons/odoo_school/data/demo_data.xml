@@ -1,0 +1,27 @@
+<odoo noupdate="1">
+  <record id="class_1" model="school.class">
+    <field name="name">Grade 1</field>
+  </record>
+  <record id="class_2" model="school.class">
+    <field name="name">Grade 2</field>
+  </record>
+
+  <record id="subject_math" model="school.subject">
+    <field name="name">Mathematics</field>
+  </record>
+  <record id="subject_eng" model="school.subject">
+    <field name="name">English</field>
+  </record>
+
+  <!-- link subjects to classes -->
+  <record id="class1_subjects" model="school.class">
+    <field name="name">Grade 1</field>
+    <field name="subject_ids" eval="[(4, ref('subject_math')), (4, ref('subject_eng'))]"/>
+  </record>
+
+  <record id="student_1" model="school.student">
+    <field name="name">Ram Kumar</field>
+    <field name="age">7</field>
+    <field name="class_id" ref="class_1"/>
+  </record>
+</odoo>

@@ -1,74 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-    <!-- Root Menu -->
-    <menuitem id="menu_school_root"
-              name="School"
-              sequence="0"/>
+  <menuitem id="menu_school_root"
+            name="School"
+            sequence="0"/>
 
-    <!-- Student Details menu-->
-    <menuitem id="menu_student_master"
-              name="Student Details"
-              parent="menu_school_root"
-              sequence="0"/>
+  <menuitem id="menu_student_master"
+            name="Student Details"
+            parent="menu_school_root"
+            sequence="0"/>
+  <menuitem id="menu_student"
+            name="Student"
+            action="action_school_student"
+            parent="menu_student_master"
+            sequence="0"/>
 
-    <!-- Student Menu -->
-    <menuitem id="menu_student"
-              name="Student"
-              action="action_school_student"
-              parent="menu_student_master"
-              sequence="0"/>
+  <menuitem id="menu_school_class"
+            name="School Class"
+            action="action_school_class"
+            parent="menu_student_master"
+            sequence="1"/>
 
-    <!--School Class Menu-->
-    <menuitem id="menu_school_class"
-              name="School Class"
-              action="action_school_class"
-              parent="menu_student_master"
-              sequence="1"/>
+  <menuitem id="menu_school_subject"
+            name="Subject"
+            action="action_school_subject"
+            parent="menu_student_master"
+            sequence="2"/>
 
-    <!--Subject Menu-->
-    <menuitem id="menu_school_subject"
-              name="Subject"
-              action="action_school_subject"
-              parent="menu_student_master"
-              sequence="2"/>
+  <menuitem id="menu_school_fee"
+            name="Fee"
+            action="action_school_fee"
+            parent="menu_student_master"
+            sequence="3"/>
 
-    <!-- Menu-->
-    <menuitem id="menu_school_fee"
-              name="Fee"
-              action="action_school_fee"
-              parent="menu_student_master"
-              sequence="3"/>
+  <menuitem id="menu_marks_master"
+            name="Marks Details"
+            parent="menu_school_root"
+            sequence="1"/>
 
-    <menuitem id="menu_marks_master"
-              name="Marks Details"
-              parent="menu_school_root"
-              sequence="0"/>
+  <menuitem id="menu_student_marks"
+            name="Marks"
+            action="action_student_marks"
+            parent="menu_marks_master"
+            sequence="1"/>
 
-    <!-- Marks Menu -->
-    <menuitem id="menu_student_marks"
-              name="Marks"
-              action="action_student_marks"
-              parent="menu_marks_master"
-              sequence="1"/>
+  <menuitem id="menu_student_marks_entry"
+            name="Marks Entry"
+            action="action_marks_entry"
+            parent="menu_marks_master"
+            sequence="2"/>
 
-    <!-- Marks Entry Menu -->
-    <menuitem id="menu_student_marks_entry"
-              name="Marks Entry"
-              action="action_marks_entry"
-              parent="menu_marks_master"
-              sequence="2"/>
+  <menuitem id="menu_marks_report_wizard"
+            name="Marks Report"
+            parent="menu_marks_master"
+            action="action_marks_report_wizard"
+            sequence="3"/>
 
-    <!--wizard menu-->
-    <menuitem id="menu_marks_report_wizard"
-              name="Marks Report"
-              parent="menu_marks_master"
-              action="action_marks_report_wizard"
-              sequence="3"/>
+  <menuitem id="menu_marks_reports"
+            name="Marks Reports"
+            parent="menu_school_root"/>
 
-<!-- multiple views menu-->
-    <menuitem id="menu_marks_reports" name="Marks Reports" parent="menu_school_root"/>
-    <menuitem id="menu_marks_report_all" name="All Marks Reports" parent="menu_marks_reports" action="action_marks_report"/>
-
-
+  <menuitem id="menu_marks_report_all"
+            name="All Marks Reports"
+            parent="menu_marks_reports"
+            action="action_student_marks"/>
 </odoo>

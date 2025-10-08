@@ -7,7 +7,6 @@ class MarksEntry(models.Model):
     class_id = fields.Many2one("school.class", string="Class", required=True)
     subject_id = fields.Many2one("school.subject", string="Subject", required=True)
     marks_ids = fields.One2many("school.student.marks", "marks_entry_id", string="Marks")
-
     name = fields.Char(string="Class_Subject", compute="_compute_name", store=True)
 
     @api.depends('class_id', 'subject_id')
