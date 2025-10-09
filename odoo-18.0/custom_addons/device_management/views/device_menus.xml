@@ -1,82 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-
     <menuitem id="menu_device_management"
               name="Device Management"
               sequence="1"/>
 
-
-    <!-- Device Type Menu -->
-    <menuitem id="menu_device_types"
-              name="Device Types"
+    <!-- Devices Menu -->
+    <menuitem id="menu_devices"
+              name="Device"
               parent="menu_device_management"
               sequence="1"/>
 
-    <menuitem id="menu_device_type_action"
-              parent="menu_device_types"
-              action="action_device_type"/>
+    <menuitem id="menu_device_action"
+              name="Devices"
+              parent="menu_devices"
+              action="action_device"
+              sequence="1"/>
 
-    <!--Device Brand Menu-->
-    <menuitem id="menu_device_brands"
-              name="Device Brands"
-              parent="menu_device_management"
+    <menuitem id="menu_device_type_action"
+              name="Device Types"
+              parent="menu_devices"
+              action="action_device_type"
               sequence="2"/>
 
-    <menuitem id="menu_device_brand_action"
-              parent="menu_device_brands"
-              action="action_device_brand"/>
+    <menuitem id="menu_device_model_action"
+              name="Device Models"
+              parent="menu_devices"
+              action="action_device_model"
+              sequence="3"/>
 
-    <!--Device Attribute Menu-->
+    <menuitem id="menu_device_brand_action"
+              name="Device Brands"
+              parent="menu_devices"
+              action="action_device_brand"
+              sequence="4"/>
+
+    <!-- Device Attribute Menu -->
     <menuitem id="menu_device_attributes"
               name="Device Attributes"
               parent="menu_device_management"
-              sequence="3"/>
+              sequence="2"/>
 
     <menuitem id="menu_device_attribute_action"
               parent="menu_device_attributes"
-              action="action_device_attribute"/>
+              action="action_device_attribute"
+              sequence="1"/>
 
-    <!--Device Model Menu-->
-    <menuitem id="menu_device_models"
-              name="Device Models"
-              parent="menu_device_management"
-              sequence="4"/>
-    <menuitem id="menu_device_model_action"
-              parent="menu_device_models"
-              action="action_device_model"/>
-
-    <!--Device Attribute Values Menu-->
-    <menuitem id="menu_device_attribute_values"
-              name="Device Attribute Values"
-              parent="menu_device_management"
-              sequence="5"/>
-
-    <menuitem id="menu_device_attribute_action"
+    <menuitem id="menu_device_attribute_value_action"
               parent="menu_device_attributes"
-              action="action_device_attribute"/>
-
-    <!--Device Menu-->
-    <menuitem id="menu_devices"
-              name="Devices"
-              parent="menu_device_management"
-              sequence="6"/>
-
-    <menuitem id="menu_device_action"
-              parent="menu_devices"
-              action="action_device"/>
-
-    <!--Attribute Assignments Menu-->
-    <menuitem id="menu_device_attribute_assignments"
-              name="Attribute Assignments"
-              parent="menu_device_management"
-              sequence="7"/>
+              action="action_device_attribute_value"
+              sequence="2"/>
 
     <menuitem id="menu_device_attribute_assignment_action"
-              parent="menu_device_attribute_assignments"
-              action="action_device_attribute_assignment"/>
-    <!-- Device Assignments Menu-->
+              parent="menu_device_attributes"
+              action="action_device_attribute_assignment"
+              sequence="3"/>
+
+    <!-- Device Assignments Menu -->
     <menuitem id="menu_device_assignment"
               name="Device Assignments"
-              parent="menu_devices"
-              action="action_device_assignment"/>
+              parent="menu_device_management"
+              action="action_device_assignment"
+              sequence="3"/>
 
 </odoo>

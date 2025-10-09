@@ -1,27 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<!-- odoo_school/views/student_marks_views.xml -->
 <odoo>
-    <record id="view_student_marks_list" model="ir.ui.view">
-        <field name="name">student.marks.list</field>
-        <field name="model">school.student.marks</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="student_id"/>
-                <field name="marks_entry_id"/>
-                <field name="marks"/>
-            </list>
-        </field>
-    </record>
+  <record id="view_student_marks_list" model="ir.ui.view">
+    <field name="name">student.marks.list</field>
+    <field name="model">school.student.marks</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="student_id"/>
+        <field name="marks_entry_id"/>
+        <field name="marks"/>
+      </list>
+    </field>
+  </record>
 
-    <record id="action_student_marks" model="ir.actions.act_window">
-        <field name="name">Student Marks</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">school.student.marks</field>
-        <field name="view_mode">list,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Student marks records
-            </p>
-        </field>
-    </record>
+  <record id="action_student_marks" model="ir.actions.act_window">
+    <field name="name">Student Marks</field>
+    <field name="res_model">school.student.marks</field>
+    <field name="view_mode">list,form</field>
+  </record>
 </odoo>

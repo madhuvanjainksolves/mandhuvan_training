@@ -5,5 +5,5 @@ class SchoolClass(models.Model):
     _description = "Class"
 
     name = fields.Char(string="Class Name", required=True)
-    #One2many
     student_ids = fields.One2many("school.student", "class_id", string="Students")
+    subject_ids = fields.Many2many('school.subject', string="Subjects")

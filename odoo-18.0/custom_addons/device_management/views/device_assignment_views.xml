@@ -20,16 +20,21 @@
         <field name="model">device.assignment</field>
         <field name="arch" type="xml">
             <form string="Device Assignment">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="new,draft,approved,returned,rejected"/>
+                </header>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="device_id"/>
-                        <field name="employee_id"/>
-                    </group>
-                    <group>
-                        <field name="date_start"/>
-                        <field name="date_expire"/>
-                        <field name="state"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="device_id"/>
+                            <field name="employee_id"/>
+                        </group>
+                        <group>
+                            <field name="date_start"/>
+                            <field name="date_expire"/>
+                            <field name="state"/>
+                        </group>
                     </group>
                 </sheet>
             </form>

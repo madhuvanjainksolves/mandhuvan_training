@@ -1,12 +1,12 @@
 {
     "name": "Odoo School",
     "version": "1.0.0",
-    "Sequence": "-1000",
+    "sequence": -1000,
     "summary": "School Management System",
-    "description": "A module to manage students, classes, subjects, and fees",
+    "description": "Manage students, classes, subjects, fees and marks.",
     "category": "Education",
     "author": "Madhuvan Jain",
-    "description": """It is a school module""",
+    "license": "LGPL-3",
     "depends": ["base"],
     "data": [
         "security/school_groups.xml",
@@ -19,12 +19,15 @@
         "views/student_marks_entry_views.xml",
         "views/student_marks_views.xml",
         "views/marks_report_wizard_views.xml",
+        "views/class_history_view.xml",
         "reports/marks_report_templates.xml",
         "reports/marks_report.xml",
         "views/marks_different_report_views.xml",
         "views/menus.xml",
     ],
+    "demo": [
+        "data/demo_data.xml",
+    ],
     "installable": True,
     "application": True,
-    'license': 'LGPL-3',
 }

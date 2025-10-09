@@ -1,15 +1,14 @@
 from odoo import models, fields
 
-class Fees(models.Model):
-    _name = "school.fee"
-    _description = "Fee"
+class SchoolFee(models.Model):
+    _name = 'school.fee'
+    _description = 'Student Fee Record'
 
-    name = fields.Char(string="Description")
-    student_id = fields.Many2one("school.student", string="Student")
+    student_id = fields.Many2one('school.student', string="Student", required=True, ondelete='cascade')
     month = fields.Selection([
-        ('1', 'First Class'), ('2', 'Second Class'), ('3', 'Third Class'),
-        ('4', 'Fourth Class'), ('5', 'Fifth Class'), ('6', 'Sixth Class'),
-        ('7', 'Seventh Class'), ('8', 'Eights Class'), ('9', 'Ninth Class'),
-        ('10', 'Tenth Class'), ('11', 'Eleventh Class'), ('12', 'C Class')
-    ], string="Class Fee")
-    amount = fields.Float(string="Amount")
+        ('jan', 'January'), ('feb', 'February'), ('mar', 'March'),
+        ('apr', 'April'), ('may', 'May'), ('jun', 'June'),
+        ('jul', 'July'), ('aug', 'August'), ('sep', 'September'),
+        ('oct', 'October'), ('nov', 'November'), ('dec', 'December')],
+        string="Month", required=True)
+    amount = fields.Float(string="Amount", required=True)

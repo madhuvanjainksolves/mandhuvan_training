@@ -12,6 +12,7 @@
     "depends": ["base", "hr"],
     "data": [
         "security/ir.model.access.csv",
+        "data/data.xml",
         "views/device_type_views.xml",
         "views/device_brand_views.xml",
         "views/device_attribute_views.xml",
@@ -21,6 +22,7 @@
         "views/device_attribute_assignment_views.xml",
         "views/device_assignment_views.xml",
         "views/device_menus.xml",
+        "views/hr_employee_inherit_views.xml",
     ],
     "installable": True,
     "application": True,

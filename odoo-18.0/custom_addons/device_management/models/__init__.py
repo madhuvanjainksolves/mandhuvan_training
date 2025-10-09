@@ -1,2 +1,9 @@
-from . import device, device_type, device_attribute,device_attribute_value ,device_attribute_assignemt, device_brand, device_model
-from . import device_assignment, hr_employee_inherit
+from . import device
+from . import device_type
+from . import device_attribute
+from . import device_attribute_value
+from . import device_attribute_assignemt
+from . import device_brand
+from . import device_model
+from . import device_assignment
+from . import hr_employee_inherit

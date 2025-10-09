@@ -1,62 +1,76 @@
 <odoo>
-    <record id="view_student_list" model="ir.ui.view">
-        <field name="name">student.list</field>
-        <field name="model">school.student</field>
-        <field name="arch" type="xml">
-            <list>
-                <field name="name"/>
-                <field name="age"/>
-                <field name="class_id"/>
-            </list>
-        </field>
-    </record>
+  <record id="view_student_list" model="ir.ui.view">
+    <field name="name">student.list</field>
+    <field name="model">school.student</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name"/>
+        <field name="age"/>
+        <field name="class_id"/>
+      </list>
+    </field>
+  </record>
 
-    <record id="view_student_form" model="ir.ui.view">
-        <field name="name">student.form</field>
-        <field name="model">school.student</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="age"/>
-                        <field name="class_id"/>
-                    </group>
-                    <notebook>
-                        <page string="Subjects">
-                            <field name="subject_ids"/>
-                        </page>
-                        <page string="Fee">
-                            <field name="fee_ids">
-                                <list>
-                                    <field name="month"/>
-                                    <field name="amount"/>
-                                </list>
-                            </field>
-                        </page>
-                        <page string="Marks">
-                            <field name="marksentry_ids">
-                                <list>
-                                    <field name="marks_entry_id"/>
-                                    <field name="marks"/>
-                                </list>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
+  <record id="view_student_form" model="ir.ui.view">
+    <field name="name">student.form</field>
+    <field name="model">school.student</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group name="top" col="3">
+            <field name="name"/>
+            <field name="age"/>
+            <field name="class_id"/>
+          </group>
+<!--          <group name="file">-->
+<!--            <field name="result_file" filename="result_filename"/>-->
+<!--          </group>-->
+          <notebook>
+            <page string="Subjects">
+              <field name="subject_ids" widget="many2many_tags"/>
+            </page>
+            <page string="Fees">
+              <field name="fee_ids">
+                <list editable="bottom">
+                  <field name="month"/>
+                  <field name="amount"/>
+                </list>
+              </field>
+            </page>
+            <page string="Marks">
+              <field name="marksentry_ids">
+                <list>
+                  <field name="marks_entry_id"/>
+                  <field name="marks"/>
+                </list>
+              </field>
+            </page>
+<!--            <page string="Previous Results">-->
+<!--              <field name="previous_marks_ids" nolabel="1"/>-->
+<!--              <label string="No previous results available."-->
+<!--                   attrs="{'invisible': [('has_previous_marks','=',True)]}" class="o_form_label"/>-->
+<!--            </page>-->
+<!--            <page string="Class History">-->
+<!--              <field name="class_history_ids">-->
+<!--                <list>-->
+<!--                  <field name="old_class_id"/>-->
+<!--                  <field name="new_class_id"/>-->
+<!--                  <field name="changed_date"/>-->
+<!--                  <field name="result_filename"/>-->
+<!--                </list>-->
+<!--              </field>-->
+<!--            </page>-->
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
 
-    <record id="action_school_student" model="ir.actions.act_window">
-        <field name="name">Students</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">school.student</field>
-        <field name="view_mode">list,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create First Student
-            </p>
-        </field>
-    </record>
+
+  <record id="action_school_student" model="ir.actions.act_window">
+    <field name="name">Students</field>
+    <field name="res_model">school.student</field>
+    <field name="view_mode">list,form</field>
+    <field name="view_id" ref="view_student_list"/>
+  </record>
 </odoo>
