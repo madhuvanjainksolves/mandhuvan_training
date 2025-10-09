@@ -1,16 +1,32 @@
 <odoo>
-  <record id="view_school_class_history_form" model="ir.ui.view">
-    <field name="name">school.class.history.form</field>
-    <field name="model">school.class.history</field>
-    <field name="arch" type="xml">
-        <form string="Class History Record">
-            <group>
+    <record id="view_class_history_list" model="ir.ui.view">
+        <field name="name">school.class.history.list</field>
+        <field name="model">school.class.history</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="student_id"/>
                 <field name="old_class_id"/>
-                <field name="new_class_id"/>
                 <field name="changed_date"/>
-                <field name="result_file" filename="result_filename"/>
-            </group>
-        </form>
-    </field>
-  </record>
+                <field name="result_filename"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_class_history_form" model="ir.ui.view">
+        <field name="name">school.class.history.form</field>
+        <field name="model">school.class.history</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="student_id" readonly="1"/>
+                        <field name="old_class_id" readonly="1"/>
+                        <field name="changed_date" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="result_file" filename="result_filename"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 </odoo>

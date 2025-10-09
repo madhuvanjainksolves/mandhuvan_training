@@ -28,7 +28,7 @@
 
   <menuitem id="menu_school_fee"
             name="Fee"
-            action="action_school_fee"
+            action="action_student_fee"
             parent="menu_student_master"
             sequence="3"/>
 
