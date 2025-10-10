@@ -7,3 +7,4 @@ access_school_marks_entry,access.school.marks.entry,model_school_marks_entry,,1,
 access_school_student_marks,access.school.student.marks,model_school_student_marks,,1,1,1,1
 access_school_class_history,access.school.class.history,model_school_class_history,,1,1,1,1
 access_marks_report_wizard,access.marks.report.wizard,model_marks_report_wizard,,1,1,1,1
+access_school_fee_structure,access_school_fee_structure,model_school_fee_structure,,1,1,1,1

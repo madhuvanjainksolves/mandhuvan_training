@@ -25,9 +25,6 @@
         "views/marks_different_report_views.xml",
         "views/menus.xml",
     ],
-    "demo": [
-        "data/demo_data.xml",
-    ],
     "installable": True,
     "application": True,
 }
